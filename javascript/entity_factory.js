@@ -5,15 +5,40 @@ EntityFactory = {
     var player = new Voy.Entity(
       new Voy.RigidBody({
         drag: 0.05,
-        maxSpeed: 0.2,
-        maxForce: 0.001
+        maxSpeed: 0.5,
+        maxForce: 0.003,
+        bounciness: 0.5
       }),
       new Voy.CircleCollider(radius),
       new PlayerInput(),
       new Voy.CircleLayer('green', radius)
     );
-    player.localPosition = new Voy.Vector2(220, 145);
+    player.addTag('player');
+    player.localPosition = new Voy.Vector2(220, 206);
     return player;
+  },
+  createWorld: function() {
+    var world = new Voy.Entity(
+      new Camera()
+    );
+    return world;
+  },
+  createZombie: function() {
+    var radius = 40;
+
+    var zombie = new Voy.Entity(
+      new Voy.RigidBody({
+        drag: 0.05,
+        maxSpeed: 0.5,
+        maxForce: 0.003,
+        bounciness: 0.5,
+        mass: 5
+      }),
+      new Voy.CircleCollider(radius),
+      new Voy.CircleLayer('red', radius)
+    );
+    zombie.localPosition = new Voy.Vector2(500, 206);
+    return zombie;
   },
   createWall: function(position, size, rotation) {
     var wall = new Voy.Entity(

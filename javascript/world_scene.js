@@ -6,7 +6,11 @@ function WorldScene(componentRegistry) {
 WorldScene.prototype = Object.create(Voy.Scene.prototype);
 
 WorldScene.prototype.initialize = function() {
-  this.addChild(EntityFactory.createPlayer());
+  var world = EntityFactory.createWorld();
+
+  world.addChild(EntityFactory.createPlayer());
+
+  world.addChild(EntityFactory.createZombie());
 
   var levelData = JSON.parse(this.assets.texts.levels)[1];
   levelData.walls.forEach(function(wallData) {
@@ -14,6 +18,8 @@ WorldScene.prototype.initialize = function() {
     var size = new Voy.Vector2(wallData.size[0], wallData.size[1]);
     var rotation = wallData.rotation;
 
-    this.addChild(EntityFactory.createWall(position, size, rotation));
-  }.bind(this));
+    world.addChild(EntityFactory.createWall(position, size, rotation));
+  });
+
+  this.addChild(world);
 };
