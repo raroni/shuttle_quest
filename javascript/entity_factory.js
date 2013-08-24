@@ -5,7 +5,7 @@ EntityFactory = {
     var spaceship = new Voy.Entity(
       new Voy.RigidBody({
         drag: 0.05,
-        maxSpeed: 0.5,
+        maxSpeed: 2,
         maxForce: 0.003,
         bounciness: 0.5
       }),
@@ -15,6 +15,14 @@ EntityFactory = {
     );
     spaceship.addTag('player');
     spaceship.localPosition = new Voy.Vector2(185, 170);
+
+    var engine = new Voy.Entity(
+      new EngineRotator(),
+      new Voy.Sprite('spaceship/engine.png', new Voy.Vector2(-14, 0))
+    );
+    engine.localPosition = new Voy.Vector2(-12, 18);
+    spaceship.addChild(engine);
+
     return spaceship;
   },
   createWorld: function() {

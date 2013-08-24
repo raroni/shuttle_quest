@@ -11,7 +11,7 @@ WorldScene.prototype.setup = function() {
   //world.addChild(EntityFactory.createTriangle());
   world.addChild(EntityFactory.createZombie());
 
-  var levelData = JSON.parse(this.assets.texts.levels)[2];
+  var levelData = JSON.parse(this.assets.texts.levels)[1];
   levelData.walls.forEach(function(wallData) {
     var position = new Voy.Point(wallData.position[0], wallData.position[1]);
     var size = new Voy.Vector2(wallData.size[0], wallData.size[1]);
