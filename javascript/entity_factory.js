@@ -3,7 +3,11 @@ EntityFactory = {
     var radius = 25;
 
     var player = new Voy.Entity(
-      new Voy.RigidBody(),
+      new Voy.RigidBody({
+        drag: 0.05,
+        maxSpeed: 0.2,
+        maxForce: 0.001
+      }),
       new Voy.CircleCollider(radius),
       new PlayerInput(),
       new Voy.CircleLayer('green', radius)
