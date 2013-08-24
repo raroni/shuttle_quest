@@ -18,6 +18,7 @@ EntityFactory = {
 
     var engine = new Voy.Entity(
       new EngineRotator(),
+      new FlameFlicker(),
       new SpaceshipFlameSprite(),
       new Voy.Sprite('spaceship/engine.png', new Voy.Vector2(-14, 0))
     );
