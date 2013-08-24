@@ -1,6 +1,6 @@
 EntityFactory = {
   createPlayer: function() {
-    var radius = 25;
+    var radius = 48;
 
     var player = new Voy.Entity(
       new Voy.RigidBody({
@@ -11,7 +11,7 @@ EntityFactory = {
       }),
       new Voy.CircleCollider(radius),
       new PlayerInput(),
-      new Voy.CircleLayer('green', radius)
+      new SpaceshipSprite()
     );
     player.addTag('player');
     player.localPosition = new Voy.Vector2(185, 170);
