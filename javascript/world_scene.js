@@ -5,14 +5,13 @@ function WorldScene(componentRegistry) {
 
 WorldScene.prototype = Object.create(Voy.Scene.prototype);
 
-WorldScene.prototype.initialize = function() {
+WorldScene.prototype.setup = function() {
   var world = EntityFactory.createWorld();
-
   world.addChild(EntityFactory.createPlayer());
-
+  //world.addChild(EntityFactory.createTriangle());
   world.addChild(EntityFactory.createZombie());
 
-  var levelData = JSON.parse(this.assets.texts.levels)[1];
+  var levelData = JSON.parse(this.assets.texts.levels)[2];
   levelData.walls.forEach(function(wallData) {
     var position = new Voy.Point(wallData.position[0], wallData.position[1]);
     var size = new Voy.Vector2(wallData.size[0], wallData.size[1]);
@@ -21,5 +20,8 @@ WorldScene.prototype.initialize = function() {
     world.addChild(EntityFactory.createWall(position, size, rotation));
   });
 
+  this.addChild(EntityFactory.createBackground());
   this.addChild(world);
+
+  Voy.Scene.prototype.setup.call(this);
 };

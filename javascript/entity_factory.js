@@ -19,7 +19,7 @@ EntityFactory = {
   },
   createWorld: function() {
     var world = new Voy.Entity(
-      new Camera()
+      new Camera(1)
     );
     return world;
   },
@@ -40,6 +40,29 @@ EntityFactory = {
     zombie.localPosition = new Voy.Vector2(500, 206);
     return zombie;
   },
+  createTriangle: function() {
+    var radius = 40;
+
+    var points = [
+      new Voy.Point(-100, -100),
+      new Voy.Point(100, -100),
+      new Voy.Point(0, 100)
+    ];
+
+    var triangle = new Voy.Entity(
+      new Voy.RigidBody({
+        drag: 0.05,
+        maxSpeed: 0.5,
+        maxForce: 0.003,
+        bounciness: 0.5,
+        mass: 5
+      }),
+      new Voy.PolygonCollider(points),
+      new Voy.PolygonLayer('blue', points)
+    );
+    triangle.localPosition = new Voy.Vector2(50, 50);
+    return triangle;
+  },
   createWall: function(position, size, rotation) {
     var wall = new Voy.Entity(
       new Voy.RigidBody({ static: true }),
@@ -50,5 +73,13 @@ EntityFactory = {
     wall.localPosition = position;
     wall.localRotation = rotation;
     return wall;
+  },
+  createBackground: function() {
+    var background = new Voy.Entity(
+      new Camera(0.1),
+      new Voy.Sprite('bg.jpg')
+    );
+
+    return background;
   }
 };

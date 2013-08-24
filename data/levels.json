@@ -2,6 +2,15 @@
   "1": {
     "walls": [
       {
+        "position": [200, 280],
+        "size": [400, 120],
+        "rotation": 0.05
+      }
+    ]
+  },
+  "2": {
+    "walls": [
+      {
         "position": [200, -50],
         "size": [1200, 300],
         "rotation": 0.05
