@@ -14,7 +14,7 @@ EntityFactory = {
       new Voy.CircleLayer('green', radius)
     );
     player.addTag('player');
-    player.localPosition = new Voy.Vector2(220, 206);
+    player.localPosition = new Voy.Vector2(185, 170);
     return player;
   },
   createWorld: function() {

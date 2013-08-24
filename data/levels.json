@@ -2,34 +2,59 @@
   "1": {
     "walls": [
       {
-        "position": [400, 50],
-        "size": [800, 100],
-        "rotation": 0
+        "position": [200, -50],
+        "size": [1200, 300],
+        "rotation": 0.05
       },
       {
-        "position": [700, 100],
-        "size": [400, 200],
+        "position": [685, 107],
+        "size": [400, 180],
         "rotation": 0.9
       },
       {
-        "position": [750, 300],
-        "size": [150, 400],
-        "rotation": 0
+        "position": [790, 350],
+        "size": [150, 300],
+        "rotation": 0.1
       },
       {
-        "position": [250, 280],
-        "size": [500, 100],
-        "rotation": 0
+        "position": [100, 589],
+        "size": [800, 700],
+        "rotation": 0.03
       },
       {
-        "position": [0, 140],
-        "size": [100, 200],
-        "rotation": 0
+        "position": [-70, 140],
+        "size": [400, 300],
+        "rotation": 0.2
       },
       {
         "position": [457, 365],
         "size": [200, 200],
         "rotation": 1.1
+      },
+      {
+        "position": [492, 509],
+        "size": [200, 200],
+        "rotation": 0
+      },
+      {
+        "position": [700, 745],
+        "size": [600, 300],
+        "rotation": -0.05
+      },
+      {
+        "position": [600, 618],
+        "size": [160, 100],
+        "rotation": 0.4
+      },
+      {
+        "position": [1250, 400],
+        "size": [460, 1000],
+        "rotation": 0.2
+      },
+      {
+        "position": [1100, 100],
+        "size": [100, 200],
+        "rotation": -0.25
       }
     ]
   }
