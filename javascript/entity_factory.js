@@ -1,8 +1,8 @@
 EntityFactory = {
-  createPlayer: function() {
+  createSpaceship: function() {
     var radius = 48;
 
-    var player = new Voy.Entity(
+    var spaceship = new Voy.Entity(
       new Voy.RigidBody({
         drag: 0.05,
         maxSpeed: 0.5,
@@ -13,9 +13,9 @@ EntityFactory = {
       new PlayerInput(),
       new SpaceshipSprite()
     );
-    player.addTag('player');
-    player.localPosition = new Voy.Vector2(185, 170);
-    return player;
+    spaceship.addTag('player');
+    spaceship.localPosition = new Voy.Vector2(185, 170);
+    return spaceship;
   },
   createWorld: function() {
     var world = new Voy.Entity(

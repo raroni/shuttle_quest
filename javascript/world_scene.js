@@ -7,7 +7,7 @@ WorldScene.prototype = Object.create(Voy.Scene.prototype);
 
 WorldScene.prototype.setup = function() {
   var world = EntityFactory.createWorld();
-  world.addChild(EntityFactory.createPlayer());
+  world.addChild(EntityFactory.createSpaceship());
   //world.addChild(EntityFactory.createTriangle());
   world.addChild(EntityFactory.createZombie());
 
