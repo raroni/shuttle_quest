@@ -5,6 +5,10 @@ function TidalForce(speed) {
 
 TidalForce.prototype = Object.create(Voy.Component.prototype);
 
+TidalForce.prototype.initialize = function() {
+  this.scene = this.getScene();
+}
+
 TidalForce.prototype.update = function(timeDelta) {
-  this.entity.localPosition[1] -= timeDelta*0.05*this.speed;
+  if(this.scene.playing) this.entity.localPosition[1] -= timeDelta*0.05*this.speed;
 };
