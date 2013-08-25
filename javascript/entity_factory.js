@@ -6,7 +6,7 @@ EntityFactory = {
       new Voy.RigidBody({
         drag: 0.05,
         maxSpeed: 2,
-        maxForce: 0.003,
+        maxForce: 0.006,
         bounciness: 0.5
       }),
       new Voy.CircleCollider(radius),

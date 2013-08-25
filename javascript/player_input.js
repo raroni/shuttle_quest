@@ -19,6 +19,7 @@ PlayerInput.prototype.update = function() {
   else if(this.keyboard.keysPressed.down) force[1] = 1;
 
   force.multiply(this.rigidBody.maxForce);
+  if(!this.keyboard.keysPressed.x) force.multiply(0.5);
 
   this.rigidBody.force.add(force);
 };
