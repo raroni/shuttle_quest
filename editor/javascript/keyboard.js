@@ -45,7 +45,7 @@
       if(this.intestingKeys.indexOf(keyName) !== -1) {
         this.controller[keyName + 'Pressed']();
       }
-      e.preventDefault();
+      if(['up', 'down', 'left', 'right'].indexOf(keyName) !== -1) e.preventDefault();
     }
   };
 

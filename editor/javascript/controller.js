@@ -5,7 +5,6 @@ function Controller(world, writer) {
 
 Controller.prototype.clicked = function(position) {
   var worldPoint = PointConverter.editorToWorld(position);
-  console.log(worldPoint.toString());
   var exitingWorldPoint = this.world.findPoint(worldPoint);
   if(exitingWorldPoint) {
     this.world.togglePoint(exitingWorldPoint);
