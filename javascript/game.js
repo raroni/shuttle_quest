@@ -38,8 +38,7 @@ Game.prototype.getNextScene = function() {
       scene = new WorldScene(this.timer, this.levels, this.levelNumber);
     } else {
       this.levelNumber++;
-      this.timer.add(Game.secondsPerLevel*1000);
-      scene = new WorldScene(this.timer, this.levels, this.levelNumber);
+      scene = new LevelCompletedScene(this.timer, this.levelNumber);
     }
   } else {
     throw new Error('I dont know what to do here!');
