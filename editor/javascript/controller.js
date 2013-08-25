@@ -4,7 +4,7 @@ function Controller(world, writer) {
 }
 
 Controller.prototype.clicked = function(position) {
-  var worldPoint = PointConverter.editorToWorld(position);
+  var worldPoint = PointConverter.editorToWorld(position, this.world.screen);
   var exitingWorldPoint = this.world.findPoint(worldPoint);
   if(exitingWorldPoint) {
     this.world.togglePoint(exitingWorldPoint);
@@ -29,6 +29,14 @@ Controller.prototype.cPressed = function(position) {
   }
   this.world.deselectPoints();
   this.world.polygons.push(polygon);
+};
+
+Controller.prototype.mPressed = function() {
+  UnitConverter.scale += .2;
+};
+
+Controller.prototype.pPressed = function() {
+  UnitConverter.scale -= .2;
 };
 
 Controller.prototype.rPressed = function() {

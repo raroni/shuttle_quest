@@ -1,15 +1,11 @@
 var PointConverter = {
-  scale: 3,
-  worldToEditor: function(worldPoint) {
-    var editorPoint = Voy.Vector2.zero();
-    editorPoint[0] = Math.round(worldPoint[0]/this.scale);
-    editorPoint[1] = Math.round(worldPoint[1]/this.scale);
-    return editorPoint;
+  worldToEditor: function(worldPoint, screen) {
+    var editorPoint = Voy.Vector2.subtract(worldPoint, screen.position);
+    return UnitConverter.worldToEditor(editorPoint);
   },
-  editorToWorld: function(editorPoint) {
-    var worldPoint = Voy.Vector2.zero();
-    worldPoint[0] = Math.round(editorPoint[0]*this.scale);
-    worldPoint[1] = Math.round(editorPoint[1]*this.scale);
+  editorToWorld: function(editorPoint, screen) {
+    var worldPoint = UnitConverter.editorToWorld(editorPoint);
+    worldPoint.add(screen.position);
     return worldPoint;
   }
 };

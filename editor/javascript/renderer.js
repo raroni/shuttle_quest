@@ -27,8 +27,8 @@ Renderer.prototype.drawPolygon = function(polygon) {
 
   var editorPoints = [];
   polygon.points.forEach(function(worldPoint) {
-    editorPoints.push(PointConverter.worldToEditor(worldPoint));
-  });
+    editorPoints.push(PointConverter.worldToEditor(worldPoint, this.world.screen));
+  }.bind(this));
 
   this.context.beginPath();
   this.context.moveTo(editorPoints[0][0], editorPoints[0][1]);
@@ -47,7 +47,7 @@ Renderer.prototype.drawPoints = function() {
 };
 
 Renderer.prototype.drawPoint = function(point) {
-  var editorPoint = PointConverter.worldToEditor(point);
+  var editorPoint = PointConverter.worldToEditor(point, this.world.screen);
   var selected = this.world.isPointSelected(point);
 
   this.context.fillStyle = selected ? 'lightblue' : 'blue';
@@ -58,8 +58,8 @@ Renderer.prototype.drawPoint = function(point) {
 };
 
 Renderer.prototype.drawScreen = function() {
-  var editorPosition = PointConverter.worldToEditor(this.world.screen.position);
-  var editorSize = PointConverter.worldToEditor(this.world.screen.size);
+  var editorPosition = PointConverter.worldToEditor(this.world.screen.position, this.world.screen);
+  var editorSize = UnitConverter.worldToEditor(this.world.screen.size, this.world.screen);
 
   this.context.globalAlpha = 0.4;
   this.context.fillStyle = 'white';
