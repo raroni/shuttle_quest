@@ -39,15 +39,29 @@ World.prototype.deselectPoints = function() {
   }
 };
 
+World.prototype.findPolygonsThatHasPoint = function(point) {
+  var polygons = [], polygon;
+  for(var i=0; this.polygons.length>i; i++) {
+    polygon = this.polygons[i];
+    if(polygon.hasPoint(point)) polygons.push(polygon);
+  }
+  return polygons;
+};
+
+World.prototype.removePolygon = function(polygon) {
+  var index = this.polygons.indexOf(polygon);
+  if(index === -1) throw new Error('Polygon does not exist.');
+  this.polygons.splice(index, 1);
+};
+
 World.prototype.removeSelectedPoints = function() {
+  var polygons;
   while(this.selectedPoints[0]) {
     this.points.splice(this.points.indexOf(this.selectedPoints[0]), 1);
-    for(var i=0; this.polygons.length>i; i++) {
-      if(this.polygons[i].hasPoint(this.selectedPoints[0])) {
-        this.polygons.splice(i, 1);
-        i--;
-      }
-    }
+    polygons = this.findPolygonsThatHasPoint(this.selectedPoints[0]);
+    polygons.forEach(function(polygon) {
+      this.removePolygon(polygon);
+    }.bind(this));
     this.togglePoint(this.selectedPoints[0]);
   }
 };

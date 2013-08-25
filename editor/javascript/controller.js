@@ -78,6 +78,25 @@ Controller.prototype.handleMove = function(x, y) {
     target[0] += x;
     target[1] += y;
   });
+
+  var moveValid = true, polygons;
+  for(var i=0; targets.length>i && moveValid; i++) {
+    polygons = this.world.findPolygonsThatHasPoint(targets[i]);
+    for(var n=0; polygons.length>n; n++) {
+      if(!polygons[i].isValid()) {
+        moveValid = false;
+        break;
+      }
+    }
+  }
+
+  if(!moveValid) {
+    alert('Move not allowed. Makes polygon concave.');
+    targets.forEach(function(target) {
+      target[0] -= x;
+      target[1] -= y;
+    });
+  }
 };
 
 Controller.moveSpeed = 25;
