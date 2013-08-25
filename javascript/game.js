@@ -8,7 +8,9 @@ function Game() {
   this.assets.texts.prefix = './data';
   this.assets.texts.suffix = '.json';
 
-  var scene = new LoadingScene();
+  this.levels = new LevelRegistry();
+
+  var scene = new LoadingScene(this.levels);
   this.changeScene(scene);
 
   this.timer = new Timer(Game.secondsPerLevel*1000);
@@ -27,17 +29,17 @@ Game.prototype.getNextScene = function() {
 
   if(this.scene instanceof LoadingScene) {
     this.levelNumber = 1;
-    scene = new WorldScene(this.timer, this.levelNumber);
+    scene = new WorldScene(this.timer, this.levels.find(this.levelNumber));
   }
   else if(this.scene instanceof WorldScene) {
     if(this.scene.outcome == 'fail') {
       this.levelNumber = 1;
       this.timer.windUp(Game.secondsPerLevel*1000);
-      scene = new WorldScene(this.timer, this.levelNumber);
+      scene = new WorldScene(this.timer, this.levels.find(this.levelNumber));
     } else {
       this.levelNumber++;
       this.timer.add(Game.secondsPerLevel*1000);
-      scene = new WorldScene(this.timer, this.levelNumber);
+      scene = new WorldScene(this.timer, this.levels.find(this.levelNumber));
     }
   } else {
     throw new Error('I dont know what to do here!');

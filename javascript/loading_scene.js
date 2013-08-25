@@ -1,5 +1,6 @@
-function LoadingScene() {
+function LoadingScene(levels) {
   Voy.Scene.call(this);
+  this.levels = levels;
 }
 
 LoadingScene.prototype = Object.create(Voy.Scene.prototype);
@@ -17,5 +18,6 @@ LoadingScene.prototype.initialize = function() {
 };
 
 LoadingScene.prototype.complete = function() {
+  this.levels.load(this.assets.texts.levels);
   this.completed = true;
 };

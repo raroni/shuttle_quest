@@ -1,10 +1,10 @@
-function WorldScene(timer, levelNumber) {
+function WorldScene(timer, levelData) {
   Voy.Scene.call(this);
   this.timer = timer;
   this.clearColor = 'rgb(200, 200, 200)';
   this.playing = false;
   this.keyboard = Voy.Keyboard.getInstance();
-  this.levelNumber = levelNumber;
+  this.levelData = levelData;
 }
 
 WorldScene.prototype = Object.create(Voy.Scene.prototype);
@@ -14,13 +14,13 @@ WorldScene.prototype.setup = function() {
 
   var hud = EntityFactory.createHUD(this.renderer.canvas.resolution);
 
-  var levelData = JSON.parse(this.assets.texts.levels)[this.levelNumber];
-  if(!levelData) throw new Error('Level not found.');
-  var playerPosition = Voy.Point.createFromArray(levelData.player.position);
+  var playerPosition = Voy.Point.createFromArray(this.levelData.player.position);
+  this.levelName = this.levelData.name;
+  this.levelNumber = this.levelData.number;
   this.player = EntityFactory.createSpaceship(playerPosition);
   world.addChild(this.player);
 
-  levelData.walls.forEach(function(wallData) {
+  this.levelData.walls.forEach(function(wallData) {
     var position = new Voy.Point(wallData.position[0], wallData.position[1]);
     var points = [];
     wallData.points.forEach(function(point) {
@@ -32,7 +32,7 @@ WorldScene.prototype.setup = function() {
     world.addChild(EntityFactory.createWall(position, points, polygonType));
   });
 
-  world.addChild(EntityFactory.createGoal(Voy.Point.createFromArray(levelData.goal.position)));
+  world.addChild(EntityFactory.createGoal(Voy.Point.createFromArray(this.levelData.goal.position)));
 
   this.addChild(EntityFactory.createBackground());
   this.addChild(world);
