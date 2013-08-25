@@ -23,6 +23,10 @@ Controller.prototype.cPressed = function(position) {
   this.world.selectedPoints.forEach(function(point) {
     polygon.points.push(point);
   }.bind(this));
+  if(!polygon.isValid()) {
+    alert('Polygon is not convex!');
+    return;
+  }
   this.world.deselectPoints();
   this.world.polygons.push(polygon);
 };
