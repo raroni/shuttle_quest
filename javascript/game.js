@@ -23,25 +23,32 @@ Game.prototype.update = function(timeDelta) {
   Voy.Game.prototype.update.call(this, timeDelta);
 };
 
+Game.prototype.makeWorldScene = function() {
+  var scene = new WorldScene(this.timer, this.levels, this.levelNumber);;
+  return scene;
+};
 
 Game.prototype.getNextScene = function() {
   var scene;
 
   if(this.scene instanceof LoadingScene) {
     this.levelNumber = 1;
-    scene = new WorldScene(this.timer, this.levels, this.levelNumber);
+    scene = this.makeWorldScene();
   }
   else if(this.scene instanceof WorldScene) {
     if(this.scene.outcome == 'fail') {
       this.levelNumber = 1;
       this.timer.windUp(Game.secondsPerLevel*1000);
-      scene = new WorldScene(this.timer, this.levels, this.levelNumber);
+      scene = this.makeWorldScene();
     } else {
-      this.levelNumber++;
       scene = new LevelCompletedScene(this.timer, this.levelNumber);
     }
+  }
+  else if(this.scene instanceof LevelCompletedScene) {
+    this.levelNumber++;
+    scene = this.makeWorldScene();
   } else {
-    throw new Error('I dont know what to do here!');
+    throw new Error('I dont know what to do!');
   }
 
   return scene;
