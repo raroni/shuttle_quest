@@ -128,6 +128,7 @@ EntityFactory = {
     var presenter = new Voy.Entity(
       new ReadyFader(),
       new FadingBackgroundLayer(),
+      new LevelProgressLayer(),
       new ReadyTextLayer()
     );
     presenter.localPosition = Voy.Point.multiply(resolution, 0.5).toPoint();

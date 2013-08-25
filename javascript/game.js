@@ -29,17 +29,17 @@ Game.prototype.getNextScene = function() {
 
   if(this.scene instanceof LoadingScene) {
     this.levelNumber = 1;
-    scene = new WorldScene(this.timer, this.levels.find(this.levelNumber));
+    scene = new WorldScene(this.timer, this.levels, this.levelNumber);
   }
   else if(this.scene instanceof WorldScene) {
     if(this.scene.outcome == 'fail') {
       this.levelNumber = 1;
       this.timer.windUp(Game.secondsPerLevel*1000);
-      scene = new WorldScene(this.timer, this.levels.find(this.levelNumber));
+      scene = new WorldScene(this.timer, this.levels, this.levelNumber);
     } else {
       this.levelNumber++;
       this.timer.add(Game.secondsPerLevel*1000);
-      scene = new WorldScene(this.timer, this.levels.find(this.levelNumber));
+      scene = new WorldScene(this.timer, this.levels, this.levelNumber);
     }
   } else {
     throw new Error('I dont know what to do here!');

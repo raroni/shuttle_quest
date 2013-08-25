@@ -1,10 +1,11 @@
-function WorldScene(timer, levelData) {
+function WorldScene(timer, levels, levelNumber) {
   Voy.Scene.call(this);
   this.timer = timer;
   this.clearColor = 'rgb(200, 200, 200)';
   this.playing = false;
   this.keyboard = Voy.Keyboard.getInstance();
-  this.levelData = levelData;
+  this.levels = levels;
+  this.levelData = this.levels.find(levelNumber);
 }
 
 WorldScene.prototype = Object.create(Voy.Scene.prototype);
