@@ -37,6 +37,7 @@ WorldScene.prototype.setup = function() {
   this.addChild(hud);
 
   this.addChild(EntityFactory.createPresenter(this.renderer.canvas.resolution));
+  this.addChild(EntityFactory.createBlackout(this.renderer.canvas.resolution));
 
   Voy.Scene.prototype.setup.call(this);
 };
@@ -59,13 +60,11 @@ WorldScene.prototype.update = function(timeDelta) {
 };
 
 WorldScene.prototype.startPlaying = function() {
-  console.log('start');
   this.playing = true;
   this.timer.start();
 };
 
 WorldScene.prototype.stopPlaying = function() {
-  console.log('start');
   this.playing = false;
   this.timer.stop();
 };
@@ -73,11 +72,9 @@ WorldScene.prototype.stopPlaying = function() {
 WorldScene.prototype.win = function() {
   this.outcome = 'fail';
   this.stopPlaying();
-  console.log('win!');
 };
 
 WorldScene.prototype.lose = function() {
   this.outcome = 'win';
   this.stopPlaying();
-  console.log('lose!');
 };

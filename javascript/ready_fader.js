@@ -14,9 +14,4 @@ ReadyFader.prototype.update = function(timeDelta) {
     if(this.scene.playing) this.activate();
   }
   Fader.prototype.update.call(this, timeDelta);
-
-  if(this.completed()) {
-    if(!window.q) console.log('JEG SKAL SLETTES');
-    window.q = true;
-  }
 };

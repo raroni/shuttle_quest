@@ -132,5 +132,13 @@ EntityFactory = {
     );
     presenter.localPosition = Voy.Point.multiply(resolution, 0.5).toPoint();
     return presenter;
+  },
+  createBlackout: function(resolution) {
+    var blackout = new Voy.Entity(
+      new DecidedFader(),
+      new FadingBackgroundLayer()
+    );
+    blackout.localPosition = Voy.Point.multiply(resolution, 0.5).toPoint();
+    return blackout;
   }
 };
