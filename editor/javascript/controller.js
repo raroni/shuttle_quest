@@ -104,8 +104,8 @@ Controller.prototype.handleMove = function(x, y) {
     if(!moveValid) {
       alert('Move not allowed. Makes polygon concave.');
       targets.forEach(function(target) {
-        target[0] -= x;
-        target[1] -= y;
+        target[0] -= x*UnitConverter.scale;
+        target[1] -= y*UnitConverter.scale;
       });
     }
   }

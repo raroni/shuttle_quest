@@ -12,7 +12,7 @@ WorldScene.prototype.setup = function() {
   var playerPosition = Voy.Point.createFromArray(levelData.player.position);
   world.addChild(EntityFactory.createSpaceship(playerPosition));
   //world.addChild(EntityFactory.createTriangle());
-  world.addChild(EntityFactory.createZombie());
+  //world.addChild(EntityFactory.createZombie());
 
   levelData.walls.forEach(function(wallData) {
     var position = new Voy.Point(wallData.position[0], wallData.position[1]);

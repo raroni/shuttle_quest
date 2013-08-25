@@ -12,11 +12,6 @@ function PolygonTypeRegistry() {
     color: 'grey'
   });
   this.add({
-    id: 3,
-    name: 'water',
-    color: 'blue'
-  });
-  this.add({
     id: 4,
     name: 'earth',
     color: 'brown'
