@@ -1,7 +1,7 @@
 function Health() {
   Voy.Component.call(this, 'health');
-  this.points = 90;
   this.maxPoints = 100;
+  this.points = this.maxPoints;
 }
 
 Health.prototype = Object.create(Voy.Component.prototype);

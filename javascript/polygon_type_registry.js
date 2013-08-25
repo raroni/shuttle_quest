@@ -14,7 +14,7 @@ function PolygonTypeRegistry() {
   this.add({
     id: 3,
     name: 'earth',
-    color: 'brown'
+    color: '#6c4d0a'
   });
   this.add({
     id: 4,
