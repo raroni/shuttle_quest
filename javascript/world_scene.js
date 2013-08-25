@@ -31,7 +31,7 @@ WorldScene.prototype.setup = function() {
     world.addChild(EntityFactory.createWall(position, points, polygonType));
   });
 
-  world.addChild(EntityFactory.createGoal(new Voy.Point(277, -1775)));
+  world.addChild(EntityFactory.createGoal(Voy.Point.createFromArray(levelData.goalPosition)));
 
   this.addChild(EntityFactory.createBackground());
   this.addChild(world);

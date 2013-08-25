@@ -7,9 +7,11 @@ PlayerInput.prototype = Object.create(Voy.Component.prototype);
 
 PlayerInput.prototype.initialize = function() {
   this.rigidBody = this.entity.rigidBody;
+  this.scene = this.getScene();
 };
 
 PlayerInput.prototype.update = function() {
+  if(this.scene.won) return false;
   var force = Voy.Vector2.zero();
   if(this.keyboard.keysPressed.right) force[0] = 1;
   else if(this.keyboard.keysPressed.left) force[0] = -1;
