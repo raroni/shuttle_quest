@@ -90,5 +90,13 @@ EntityFactory = {
     );
 
     return background;
+  },
+  createHUD: function(renderer) {
+    var hud = new Voy.Entity();
+    var timer = new Voy.Entity(new TimerLayer());
+    timer.localPosition[0] = renderer.canvas.resolution[0] - 11;
+    timer.localPosition[1] = 44;
+    hud.addChild(timer);
+    return hud;
   }
 };

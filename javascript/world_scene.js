@@ -1,5 +1,6 @@
-function WorldScene(componentRegistry) {
-  Voy.Scene.call(this, componentRegistry);
+function WorldScene(timer) {
+  Voy.Scene.call(this);
+  this.timer = timer;
   this.clearColor = 'rgb(200, 200, 200)';
 }
 
@@ -7,6 +8,8 @@ WorldScene.prototype = Object.create(Voy.Scene.prototype);
 
 WorldScene.prototype.setup = function() {
   var world = EntityFactory.createWorld();
+
+  var hud = EntityFactory.createHUD(this.renderer);
 
   var levelData = JSON.parse(this.assets.texts.levels)[1];
   var playerPosition = Voy.Point.createFromArray(levelData.player.position);
@@ -28,6 +31,12 @@ WorldScene.prototype.setup = function() {
 
   this.addChild(EntityFactory.createBackground());
   this.addChild(world);
+  this.addChild(hud);
 
   Voy.Scene.prototype.setup.call(this);
+};
+
+WorldScene.prototype.initialize = function() {
+  this.timer.start();
+  Voy.Scene.prototype.initialize.call(this);
 };
