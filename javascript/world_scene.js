@@ -15,9 +15,8 @@ WorldScene.prototype.setup = function() {
 
   var levelData = JSON.parse(this.assets.texts.levels)[1];
   var playerPosition = Voy.Point.createFromArray(levelData.player.position);
-  world.addChild(EntityFactory.createSpaceship(playerPosition));
-  //world.addChild(EntityFactory.createTriangle());
-  //world.addChild(EntityFactory.createZombie());
+  this.player = EntityFactory.createSpaceship(playerPosition);
+  world.addChild(this.player);
 
   levelData.walls.forEach(function(wallData) {
     var position = new Voy.Point(wallData.position[0], wallData.position[1]);
@@ -47,17 +46,38 @@ WorldScene.prototype.initialize = function() {
 };
 
 WorldScene.prototype.update = function(timeDelta) {
-  if(!this.playing) {
-    if(this.keyboard.anyKeysPressed()) this.start();
+  if(!this.outcome) {
+    if(!this.playing) {
+      if(this.keyboard.anyKeysPressed()) this.startPlaying();
+    }
+    else if(this.timer.isCompleted() || this.player.health.isDead()) {
+      this.lose();
+    }
   }
+
   Voy.Scene.prototype.update.call(this, timeDelta);
 };
 
-WorldScene.prototype.start = function() {
+WorldScene.prototype.startPlaying = function() {
+  console.log('start');
   this.playing = true;
   this.timer.start();
 };
 
+WorldScene.prototype.stopPlaying = function() {
+  console.log('start');
+  this.playing = false;
+  this.timer.stop();
+};
+
 WorldScene.prototype.win = function() {
-  this.won = true;
+  this.outcome = 'fail';
+  this.stopPlaying();
+  console.log('win!');
+};
+
+WorldScene.prototype.lose = function() {
+  this.outcome = 'win';
+  this.stopPlaying();
+  console.log('lose!');
 };

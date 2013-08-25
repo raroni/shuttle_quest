@@ -9,5 +9,5 @@ CollisionWin.prototype.initialize = function() {
 };
 
 CollisionWin.prototype.collided = function() {
-  if(!this.scene.won) this.scene.win();
+  if(!this.scene.outcome) this.scene.win();
 };

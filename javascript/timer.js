@@ -24,6 +24,10 @@ Timer.prototype.start = function() {
   this.running = true;
 };
 
+Timer.prototype.isCompleted = function() {
+  return this.milliSeconds === 0;
+};
+
 Timer.prototype.getSeconds = function() {
   return Math.floor(this.milliSeconds/1000);
 };

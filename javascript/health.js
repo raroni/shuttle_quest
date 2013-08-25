@@ -14,3 +14,7 @@ Health.prototype.receiveDamage = function(points) {
 Health.prototype.getPercentage = function() {
   return this.points/this.maxPoints;
 };
+
+Health.prototype.isDead = function() {
+  return this.points === 0;
+};

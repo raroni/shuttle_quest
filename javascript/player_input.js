@@ -11,7 +11,7 @@ PlayerInput.prototype.initialize = function() {
 };
 
 PlayerInput.prototype.update = function() {
-  if(this.scene.won) return false;
+  if(!this.scene.playing) return;
   var force = Voy.Vector2.zero();
   if(this.keyboard.keysPressed.right) force[0] = 1;
   else if(this.keyboard.keysPressed.left) force[0] = -1;
