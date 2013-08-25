@@ -12,5 +12,5 @@ FadingBackgroundLayer.prototype.initialize = function() {
 
 FadingBackgroundLayer.prototype.draw = function(canvas) {
   this.opacity = this.fader.current;
-  canvas.drawRectangle(Voy.Vector2.zero(), this.size, 'black');
+  canvas.drawRectangle(this.size, 'black');
 };

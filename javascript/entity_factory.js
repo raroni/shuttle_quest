@@ -10,7 +10,9 @@ EntityFactory = {
         bounciness: 0.5
       }),
       new Voy.CircleCollider(radius),
+      new CollisionDamageInflictor(),
       new PlayerInput(),
+      new Health(),
       new SpaceshipSprite()
     );
     spaceship.addTag('player');
@@ -100,10 +102,16 @@ EntityFactory = {
   },
   createHUD: function(resolution) {
     var hud = new Voy.Entity();
+
     var timer = new Voy.Entity(new TimerLayer());
     timer.localPosition[0] = resolution[0] - 11;
     timer.localPosition[1] = 44;
     hud.addChild(timer);
+
+    var healthCircle = new Voy.Entity(new HealthCircleLayer());
+    healthCircle.localPosition = new Voy.Vector2(60, 60);
+    hud.addChild(healthCircle);
+
     return hud;
   },
   createPresenter: function(resolution) {
