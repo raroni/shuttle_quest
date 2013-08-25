@@ -12,6 +12,7 @@ EntityFactory = {
       new Voy.CircleCollider(radius),
       new CollisionDamageInflictor(),
       new PlayerInput(),
+      new Thrust(),
       new Health(),
       new SpaceshipSprite()
     );
@@ -94,7 +95,7 @@ EntityFactory = {
   },
   createBackground: function() {
     var background = new Voy.Entity(
-      new Camera(0.1),
+      new Camera(0.05),
       new Voy.Sprite('bg.jpg')
     );
 

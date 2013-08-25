@@ -11,6 +11,7 @@ LoadingScene.prototype.initialize = function() {
   this.assets.images.add('spaceship/hull.png');
   this.assets.images.add('spaceship/engine.png');
   this.assets.images.add('spaceship/flame.png');
+  this.assets.images.add('spaceship/large_flame.png');
 
   this.assets.images.add('bg.jpg');
 

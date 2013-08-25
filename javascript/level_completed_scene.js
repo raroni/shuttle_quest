@@ -28,5 +28,5 @@ LevelCompletedScene.prototype.setup = function() {
 LevelCompletedScene.prototype.update = function(timeDelta) {
   Voy.Scene.prototype.update.call(this, timeDelta);
   this.time += timeDelta;
-  if(this.time > 6500) this.completed = true;
+  if(this.time > 6000) this.completed = true;
 };

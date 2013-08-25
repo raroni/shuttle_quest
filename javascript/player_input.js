@@ -6,20 +6,20 @@ function PlayerInput() {
 PlayerInput.prototype = Object.create(Voy.Component.prototype);
 
 PlayerInput.prototype.initialize = function() {
-  this.rigidBody = this.entity.rigidBody;
   this.scene = this.getScene();
 };
 
 PlayerInput.prototype.update = function() {
-  if(!this.scene.playing) return;
-  var force = Voy.Vector2.zero();
-  if(this.keyboard.keysPressed.right) force[0] = 1;
-  else if(this.keyboard.keysPressed.left) force[0] = -1;
-  if(this.keyboard.keysPressed.up) force[1] = -1;
-  else if(this.keyboard.keysPressed.down) force[1] = 1;
+  var direction = Voy.Vector2.zero();
 
-  force.multiply(this.rigidBody.maxForce);
-  if(!this.keyboard.keysPressed.x) force.multiply(0.5);
-
-  this.rigidBody.force.add(force);
+  if(this.scene.playing) {
+    if(this.keyboard.keysPressed.right) direction[0] = 1;
+    else if(this.keyboard.keysPressed.left) direction[0] = -1;
+    if(this.keyboard.keysPressed.up) direction[1] = -1;
+    else if(this.keyboard.keysPressed.down) direction[1] = 1;
+    this.entity.thrust.boosterOn = this.keyboard.keysPressed.x;
+  } else {
+    this.entity.thrust.boosterOn = false;
+  }
+  this.entity.thrust.direction = direction;
 };
