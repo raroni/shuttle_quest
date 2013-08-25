@@ -11,7 +11,7 @@ function Game() {
   var scene = new LoadingScene();
   this.changeScene(scene);
 
-  this.timer = new Timer(10000);
+  this.timer = new Timer(Game.secondsPerLevel*1000);
 }
 
 Game.prototype = Object.create(Voy.Game.prototype);
@@ -23,6 +23,27 @@ Game.prototype.update = function(timeDelta) {
 
 
 Game.prototype.getNextScene = function() {
-  var scene = new WorldScene(this.timer);
+  var scene;
+
+  if(this.scene instanceof LoadingScene) {
+    this.levelNumber = 1;
+    scene = new WorldScene(this.timer, this.levelNumber);
+  }
+  else if(this.scene instanceof WorldScene) {
+    if(this.scene.outcome == 'fail') {
+      this.levelNumber = 1;
+      this.timer.windUp(Game.secondsPerLevel*1000);
+      scene = new WorldScene(this.timer, this.levelNumber);
+    } else {
+      this.levelNumber++;
+      this.timer.add(Game.secondsPerLevel*1000);
+      scene = new WorldScene(this.timer, this.levelNumber);
+    }
+  } else {
+    throw new Error('I dont know what to do here!');
+  }
+
   return scene;
 };
+
+Game.secondsPerLevel = 10;

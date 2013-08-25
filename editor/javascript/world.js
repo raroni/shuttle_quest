@@ -84,12 +84,14 @@ World.prototype.removeSelectedPoints = function() {
   }
 };
 
-
 World.prototype.toData = function() {
   var world = {
     walls: [],
     player: {
-      position: this.screen.position.toArray()
+      position: this.start.toArray()
+    },
+    goal: {
+      position: this.goal.toArray()
     }
   };
 

@@ -51,6 +51,14 @@ Controller.prototype.dPressed = function() {
   this.world.deselectPoints();
 };
 
+Controller.prototype.gPressed = function() {
+  this.world.goal = this.world.screen.position.clone();
+};
+
+Controller.prototype.sPressed = function() {
+  this.world.start = this.world.screen.position.clone();
+};
+
 Controller.prototype.leftPressed = function() {
   this.handleMove(-Controller.moveSpeed, 0);
 };

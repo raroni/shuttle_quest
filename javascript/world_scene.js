@@ -1,9 +1,10 @@
-function WorldScene(timer) {
+function WorldScene(timer, levelNumber) {
   Voy.Scene.call(this);
   this.timer = timer;
   this.clearColor = 'rgb(200, 200, 200)';
   this.playing = false;
   this.keyboard = Voy.Keyboard.getInstance();
+  this.levelNumber = levelNumber;
 }
 
 WorldScene.prototype = Object.create(Voy.Scene.prototype);
@@ -13,7 +14,8 @@ WorldScene.prototype.setup = function() {
 
   var hud = EntityFactory.createHUD(this.renderer.canvas.resolution);
 
-  var levelData = JSON.parse(this.assets.texts.levels)[1];
+  var levelData = JSON.parse(this.assets.texts.levels)[this.levelNumber];
+  if(!levelData) throw new Error('Level not found.');
   var playerPosition = Voy.Point.createFromArray(levelData.player.position);
   this.player = EntityFactory.createSpaceship(playerPosition);
   world.addChild(this.player);
@@ -30,7 +32,7 @@ WorldScene.prototype.setup = function() {
     world.addChild(EntityFactory.createWall(position, points, polygonType));
   });
 
-  world.addChild(EntityFactory.createGoal(Voy.Point.createFromArray(levelData.goalPosition)));
+  world.addChild(EntityFactory.createGoal(Voy.Point.createFromArray(levelData.goal.position)));
 
   this.addChild(EntityFactory.createBackground());
   this.addChild(world);
@@ -74,11 +76,11 @@ WorldScene.prototype.stopPlaying = function() {
 };
 
 WorldScene.prototype.win = function() {
-  this.outcome = 'fail';
+  this.outcome = 'win';
   this.stopPlaying();
 };
 
 WorldScene.prototype.lose = function() {
-  this.outcome = 'win';
+  this.outcome = 'fail';
   this.stopPlaying();
 };

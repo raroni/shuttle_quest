@@ -1,5 +1,5 @@
 function Timer(milliSeconds) {
-  this.milliSeconds = 10000;
+  this.milliSeconds = milliSeconds;
   this.running = false;
 }
 
@@ -16,8 +16,16 @@ Timer.prototype.update = function(timeDelta) {
   }
 };
 
+Timer.prototype.windUp = function(milliSeconds) {
+  this.milliSeconds = milliSeconds;
+};
+
 Timer.prototype.stop = function() {
   this.running = false;
+};
+
+Timer.prototype.add = function(milliSeconds) {
+  this.milliSeconds += milliSeconds;
 };
 
 Timer.prototype.start = function() {

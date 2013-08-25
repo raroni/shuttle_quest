@@ -17,6 +17,8 @@ Renderer.prototype.update = function() {
   this.drawPoints();
   this.drawScreen();
   this.drawPolygonTypes();
+  if(this.world.goal) this.drawGoal();
+  if(this.world.start) this.drawStart();
 };
 
 Renderer.prototype.drawPolygonTypes = function() {
@@ -73,6 +75,26 @@ Renderer.prototype.drawPoint = function(point) {
   var selected = this.world.isPointSelected(point);
 
   this.context.fillStyle = selected ? 'lightblue' : 'blue';
+  this.context.beginPath();
+  this.context.arc(editorPoint[0], editorPoint[1], 10, 0, Math.PI*2, true);
+  this.context.closePath();
+  this.context.fill();
+};
+
+Renderer.prototype.drawGoal = function() {
+  var editorPoint = PointConverter.worldToEditor(this.world.goal, this.world.screen);
+
+  this.context.fillStyle = 'yellow';
+  this.context.beginPath();
+  this.context.arc(editorPoint[0], editorPoint[1], 10, 0, Math.PI*2, true);
+  this.context.closePath();
+  this.context.fill();
+};
+
+Renderer.prototype.drawStart = function() {
+  var editorPoint = PointConverter.worldToEditor(this.world.start, this.world.screen);
+
+  this.context.fillStyle = 'green';
   this.context.beginPath();
   this.context.arc(editorPoint[0], editorPoint[1], 10, 0, Math.PI*2, true);
   this.context.closePath();
