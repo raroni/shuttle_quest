@@ -50,21 +50,19 @@ Renderer.prototype.drawPoint = function(point) {
   var editorPoint = PointConverter.worldToEditor(point);
   var selected = this.world.isPointSelected(point);
 
-  if(!selected) this.context.globalAlpha = 0.5;
-  this.context.fillStyle = 'blue';
+  this.context.fillStyle = selected ? 'lightblue' : 'blue';
   this.context.beginPath();
   this.context.arc(editorPoint[0], editorPoint[1], 10, 0, Math.PI*2, true);
   this.context.closePath();
   this.context.fill();
-  if(!selected) this.context.globalAlpha = 1;
 };
 
 Renderer.prototype.drawScreen = function() {
   var editorPosition = PointConverter.worldToEditor(this.world.screen.position);
   var editorSize = PointConverter.worldToEditor(this.world.screen.size);
 
-  this.context.globalAlpha = 0.2;
-  this.context.fillStyle = 'red';
+  this.context.globalAlpha = 0.4;
+  this.context.fillStyle = 'white';
   this.context.fillRect(
     editorPosition[0]-editorSize[0]/2,
     editorPosition[1]-editorSize[1]/2,

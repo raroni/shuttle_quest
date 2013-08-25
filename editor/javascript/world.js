@@ -65,12 +65,12 @@ World.prototype.toData = function() {
 
     var wall = {
       points: [],
-      center: center
+      position: center
     };
 
     polygon.points.forEach(function(point) {
       var localPoint = Voy.Point.subtract(point, center);
-      wall.points.push([localPoint.toArray()]);
+      wall.points.push(localPoint.toArray());
     });
     walls.push(wall);
   });

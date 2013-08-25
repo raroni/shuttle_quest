@@ -31,21 +31,30 @@
     88: 'x',
     89: 'y',
     90: 'z',
+    91: 'cmd'
   };
 
   function Keyboard(controller) {
     this.controller = controller;
     document.addEventListener('keydown', this.keyPressed.bind(this));
+    document.addEventListener('keyup', this.keyReleased.bind(this));
     this.intestingKeys = ['up', 'down', 'right', 'left', 'c', 'd', 'r', 'w'];
+    this.pressedKeys = {};
   }
 
   Keyboard.prototype = {
     keyPressed: function(e) {
       var keyName = keyCodeMap[e.keyCode];
-      if(this.intestingKeys.indexOf(keyName) !== -1) {
+      this.pressedKeys[keyName] = true;
+      if(this.intestingKeys.indexOf(keyName) !== -1 && !this.pressedKeys.cmd) {
         this.controller[keyName + 'Pressed']();
       }
+
       if(['up', 'down', 'left', 'right'].indexOf(keyName) !== -1) e.preventDefault();
+    },
+    keyReleased: function(e) {
+      var keyName = keyCodeMap[e.keyCode];
+      delete this.pressedKeys[keyName];
     }
   };
 
