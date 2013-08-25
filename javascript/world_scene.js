@@ -7,11 +7,13 @@ WorldScene.prototype = Object.create(Voy.Scene.prototype);
 
 WorldScene.prototype.setup = function() {
   var world = EntityFactory.createWorld();
-  world.addChild(EntityFactory.createSpaceship());
+
+  var levelData = JSON.parse(this.assets.texts.levels)[1];
+  var playerPosition = Voy.Point.createFromArray(levelData.player.position);
+  world.addChild(EntityFactory.createSpaceship(playerPosition));
   //world.addChild(EntityFactory.createTriangle());
   world.addChild(EntityFactory.createZombie());
 
-  var levelData = JSON.parse(this.assets.texts.levels)[1];
   levelData.walls.forEach(function(wallData) {
     var position = new Voy.Point(wallData.position[0], wallData.position[1]);
     var points = [];

@@ -54,7 +54,13 @@ World.prototype.removeSelectedPoints = function() {
 
 
 World.prototype.toData = function() {
-  var walls = [];
+  var world = {
+    walls: [],
+    player: {
+      position: this.screen.position.toArray()
+    }
+  };
+
   this.polygons.forEach(function(polygon) {
     var center = Voy.Point.zero();
     polygon.points.forEach(function(point) {
@@ -72,7 +78,8 @@ World.prototype.toData = function() {
       var localPoint = Voy.Point.subtract(point, center);
       wall.points.push(localPoint.toArray());
     });
-    walls.push(wall);
+    world.walls.push(wall);
   });
-  return walls;
+
+  return world;
 };
