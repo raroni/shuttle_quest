@@ -44,7 +44,6 @@ Controller.prototype.rPressed = function() {
 };
 
 Controller.prototype.wPressed = function() {
-  console.log('wPressed');
   this.writer.execute();
 };
 
@@ -84,9 +83,11 @@ Controller.prototype.handleMove = function(x, y) {
   } else {
     targets = [this.world.screen.position];
   }
+  var translation = new Voy.Vector2(x*UnitConverter.scale, y*UnitConverter.scale);
+  translation.round();
+
   targets.forEach(function(target) {
-    target[0] += x*UnitConverter.scale;
-    target[1] += y*UnitConverter.scale;
+    target.add(translation);
   });
 
   if(targetsArePoints) {
@@ -104,8 +105,7 @@ Controller.prototype.handleMove = function(x, y) {
     if(!moveValid) {
       alert('Move not allowed. Makes polygon concave.');
       targets.forEach(function(target) {
-        target[0] -= x*UnitConverter.scale;
-        target[1] -= y*UnitConverter.scale;
+        target.subtract(translation);
       });
     }
   }
