@@ -85,7 +85,7 @@ World.prototype.toData = function() {
 
     var wall = {
       points: [],
-      position: center
+      position: center.toArray()
     };
 
     polygon.points.forEach(function(point) {
