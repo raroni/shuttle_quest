@@ -21,6 +21,8 @@ WorldScene.prototype.setup = function() {
   this.player = EntityFactory.createSpaceship(playerPosition);
   world.addChild(this.player);
 
+  if(this.levelData.tide) world.addChild(EntityFactory.createTide(this.levelData.tide));
+
   this.levelData.walls.forEach(function(wallData) {
     var position = new Voy.Point(wallData.position[0], wallData.position[1]);
     var points = [];

@@ -12,6 +12,7 @@ EntityFactory = {
       new Voy.CircleCollider(radius),
       new CollisionDamageInflictor(),
       new PlayerInput(),
+      new WaterResistance(),
       new Thrust(),
       new Health(),
       new SpaceshipSprite()
@@ -114,6 +115,16 @@ EntityFactory = {
     hud.addChild(healthCircle);
 
     return hud;
+  },
+  createTide: function(tideConfig) {
+    var tide = new Voy.Entity(
+      new TidalForce(tideConfig.speed),
+      new Voy.RectangleCollider(new Voy.Vector2(4000, 1120)),
+      new WaterLayer()
+    );
+    tide.addTag('tide');
+    tide.localPosition = Voy.Point.createFromArray(tideConfig.position);
+    return tide;
   },
   createGoal: function(position) {
     var radius = 50;

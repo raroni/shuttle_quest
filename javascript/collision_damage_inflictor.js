@@ -11,7 +11,7 @@ CollisionDamageInflictor.prototype.initialize = function() {
 }
 
 CollisionDamageInflictor.prototype.collided = function(collision) {
-  if(collision.velocityAlongNormal*-1 > this.minimumLimit) {
+  if(collision.isPhysical() && collision.velocityAlongNormal*-1 > this.minimumLimit) {
     this.health.receiveDamage(Math.round(collision.velocityAlongNormal*-this.amount));
   }
 };
