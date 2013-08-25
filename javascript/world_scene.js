@@ -2,6 +2,8 @@ function WorldScene(timer) {
   Voy.Scene.call(this);
   this.timer = timer;
   this.clearColor = 'rgb(200, 200, 200)';
+  this.playing = false;
+  this.keyboard = Voy.Keyboard.getInstance();
 }
 
 WorldScene.prototype = Object.create(Voy.Scene.prototype);
@@ -9,7 +11,7 @@ WorldScene.prototype = Object.create(Voy.Scene.prototype);
 WorldScene.prototype.setup = function() {
   var world = EntityFactory.createWorld();
 
-  var hud = EntityFactory.createHUD(this.renderer);
+  var hud = EntityFactory.createHUD(this.renderer.canvas.resolution);
 
   var levelData = JSON.parse(this.assets.texts.levels)[1];
   var playerPosition = Voy.Point.createFromArray(levelData.player.position);
@@ -33,10 +35,23 @@ WorldScene.prototype.setup = function() {
   this.addChild(world);
   this.addChild(hud);
 
+  this.addChild(EntityFactory.createPresenter(this.renderer.canvas.resolution));
+
   Voy.Scene.prototype.setup.call(this);
 };
 
 WorldScene.prototype.initialize = function() {
-  this.timer.start();
   Voy.Scene.prototype.initialize.call(this);
+};
+
+WorldScene.prototype.update = function(timeDelta) {
+  if(!this.playing) {
+    if(this.keyboard.anyKeysPressed()) this.start();
+  }
+  Voy.Scene.prototype.update.call(this, timeDelta);
+};
+
+WorldScene.prototype.start = function() {
+  this.playing = true;
+  this.timer.start();
 };

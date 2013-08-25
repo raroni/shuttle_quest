@@ -16,13 +16,20 @@ EntityFactory = {
     spaceship.addTag('player');
     spaceship.localPosition = position;
 
-    var engine = new Voy.Entity(
-      new EngineRotator(),
+    var engine = new Voy.Entity(new EngineRotator());
+    engine.localPosition = new Voy.Vector2(-12, 18);
+
+    var flame = new Voy.Entity(
       new FlameFlicker(),
-      new SpaceshipFlameSprite(),
+      new SpaceshipFlameSprite()
+    );
+    engine.addChild(flame);
+
+    var engineCase = new Voy.Entity(
       new Voy.Sprite('spaceship/engine.png', new Voy.Vector2(-14, 0))
     );
-    engine.localPosition = new Voy.Vector2(-12, 18);
+    engine.addChild(engineCase);
+
     spaceship.addChild(engine);
 
     return spaceship;
@@ -91,12 +98,21 @@ EntityFactory = {
 
     return background;
   },
-  createHUD: function(renderer) {
+  createHUD: function(resolution) {
     var hud = new Voy.Entity();
     var timer = new Voy.Entity(new TimerLayer());
-    timer.localPosition[0] = renderer.canvas.resolution[0] - 11;
+    timer.localPosition[0] = resolution[0] - 11;
     timer.localPosition[1] = 44;
     hud.addChild(timer);
     return hud;
+  },
+  createPresenter: function(resolution) {
+    var presenter = new Voy.Entity(
+      new ReadyFader(),
+      new FadingBackgroundLayer(),
+      new ReadyTextLayer()
+    );
+    presenter.localPosition = Voy.Point.multiply(resolution, 0.5).toPoint();
+    return presenter;
   }
 };

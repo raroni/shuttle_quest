@@ -1,8 +1,8 @@
 function TimerLayer() {
-  Voy.Component.call(this, 'timerLayer');
+  Voy.Layer.call(this, 'timerLayer');
 }
 
-TimerLayer.prototype = Object.create(Voy.Component.prototype);
+TimerLayer.prototype = Object.create(Voy.Layer.prototype);
 
 TimerLayer.prototype.initialize = function() {
   this.timer = this.getScene().timer;

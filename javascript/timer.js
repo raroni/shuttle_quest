@@ -23,3 +23,7 @@ Timer.prototype.stop = function() {
 Timer.prototype.start = function() {
   this.running = true;
 };
+
+Timer.prototype.getSeconds = function() {
+  return Math.floor(this.milliSeconds/1000);
+};

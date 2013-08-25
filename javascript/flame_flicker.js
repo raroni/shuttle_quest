@@ -8,7 +8,7 @@ function FlameFlicker() {
 FlameFlicker.prototype = Object.create(Voy.Component.prototype);
 
 FlameFlicker.prototype.initialize = function() {
-  this.spaceshipBody = this.entity.parent.rigidBody;
+  this.spaceshipBody = this.entity.parent.parent.rigidBody;
 };
 
 FlameFlicker.prototype.update = function(timeDelta) {
