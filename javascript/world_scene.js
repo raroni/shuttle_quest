@@ -71,10 +71,7 @@ WorldScene.prototype.update = function(timeDelta) {
 
   Voy.Scene.prototype.update.call(this, timeDelta);
 
-  if(this.blackout.fader.isCompleted()) {
-    console.log('completed!');
-    this.completed = true;
-  }
+  if(this.blackout.fader.isCompleted()) this.completed = true;
 };
 
 WorldScene.prototype.startPlaying = function() {
