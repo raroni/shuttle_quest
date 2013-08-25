@@ -10,5 +10,6 @@ TidalForce.prototype.initialize = function() {
 }
 
 TidalForce.prototype.update = function(timeDelta) {
+  if(this.speed == 0) return;
   if(this.scene.playing) this.entity.localPosition[1] -= timeDelta*0.05*this.speed;
 };
