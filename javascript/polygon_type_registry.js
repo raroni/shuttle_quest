@@ -12,12 +12,12 @@ function PolygonTypeRegistry() {
     color: 'grey'
   });
   this.add({
-    id: 4,
+    id: 3,
     name: 'earth',
     color: 'brown'
   });
   this.add({
-    id: 5,
+    id: 4,
     name: 'vegetation',
     color: 'green'
   });
