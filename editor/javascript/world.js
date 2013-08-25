@@ -3,6 +3,8 @@ function World() {
   this.polygons = [];
   this.screen = { position: Voy.Point.zero(), size: new Voy.Point(800, 600) };
   this.selectedPoints = [];
+  this.selectedPolygonTypeId = 1;
+  this.polygonTypes = PolygonTypeRegistry.getInstance();
 }
 
 World.prototype.findPoint = function(point) {
@@ -15,6 +17,22 @@ World.prototype.findPoint = function(point) {
       currentPoint[1]-World.findTolerance <= point[1] &&
       currentPoint[1]+World.findTolerance >= point[1]
     ) return currentPoint;
+  }
+};
+
+World.prototype.getSelectedPolygonType = function() {
+  return this.polygonTypes.find(this.selectedPolygonTypeId);
+};
+
+World.prototype.selectNextPolygonType = function() {
+  this.selectedPolygonTypeId += 1;
+  if(this.polygonTypes.list.length+1 == this.selectedPolygonTypeId) this.selectedPolygonTypeId = 1;
+};
+
+World.prototype.selectPreviousPolygonType = function() {
+  this.selectedPolygonTypeId -= 1;
+  if(this.selectedPolygonTypeId == 0) {
+    this.selectedPolygonTypeId = this.polygonTypes.list.length;
   }
 };
 
@@ -85,7 +103,8 @@ World.prototype.toData = function() {
 
     var wall = {
       points: [],
-      position: center.toArray()
+      position: center.toArray(),
+      polygonTypeId: polygon.type.id
     };
 
     polygon.points.forEach(function(point) {

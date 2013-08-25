@@ -73,11 +73,11 @@ EntityFactory = {
     triangle.localPosition = new Voy.Vector2(50, 50);
     return triangle;
   },
-  createWall: function(position, points, rotation) {
+  createWall: function(position, points, type) {
     var wall = new Voy.Entity(
       new Voy.RigidBody({ static: true }),
       new Voy.PolygonCollider(points),
-      new Voy.PolygonLayer('grey', points)
+      new Voy.PolygonLayer(type.color, points)
     );
 
     wall.localPosition = position;

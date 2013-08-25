@@ -7,5 +7,5 @@ function Writer(world) {
 
 Writer.prototype.execute = function() {
   var data = this.world.toData();
-  this.element.innerHTML = JSON.stringify(data);
+  this.element.value = JSON.stringify(data);
 };

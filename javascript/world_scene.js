@@ -21,7 +21,9 @@ WorldScene.prototype.setup = function() {
       points.push(new Voy.Point(point[0], point[1]));
     });
 
-    world.addChild(EntityFactory.createWall(position, points));
+    var polygonType = PolygonTypeRegistry.getInstance().find(wallData.polygonTypeId);
+
+    world.addChild(EntityFactory.createWall(position, points, polygonType));
   });
 
   this.addChild(EntityFactory.createBackground());

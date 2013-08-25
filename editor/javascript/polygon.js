@@ -1,5 +1,6 @@
-function Polygon() {
+function Polygon(type) {
   this.points = [];
+  this.type = type;
 }
 
 Polygon.prototype.hasPoint = function(point) {

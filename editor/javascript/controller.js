@@ -19,7 +19,7 @@ Controller.prototype.cPressed = function(position) {
     alert('Too few polygons selected.')
     return;
   }
-  var polygon = new Polygon();
+  var polygon = new Polygon(this.world.getSelectedPolygonType());
   this.world.selectedPoints.forEach(function(point) {
     polygon.points.push(point);
   }.bind(this));
@@ -44,6 +44,7 @@ Controller.prototype.rPressed = function() {
 };
 
 Controller.prototype.wPressed = function() {
+  console.log('wPressed');
   this.writer.execute();
 };
 
@@ -67,36 +68,47 @@ Controller.prototype.downPressed = function() {
   this.handleMove(0, Controller.moveSpeed);
 };
 
+Controller.prototype.zPressed = function() {
+  this.world.selectNextPolygonType();
+};
+
+Controller.prototype.xPressed = function() {
+  this.world.selectPreviousPolygonType();
+};
+
 Controller.prototype.handleMove = function(x, y) {
-  var targets;
+  var targets, targetsArePoints = false;
   if(this.world.selectedPoints.length != 0) {
+    targetsArePoints = true;
     targets = this.world.selectedPoints;
   } else {
     targets = [this.world.screen.position];
   }
   targets.forEach(function(target) {
-    target[0] += x;
-    target[1] += y;
+    target[0] += x*UnitConverter.scale;
+    target[1] += y*UnitConverter.scale;
   });
 
-  var moveValid = true, polygons;
-  for(var i=0; targets.length>i && moveValid; i++) {
-    polygons = this.world.findPolygonsThatHasPoint(targets[i]);
-    for(var n=0; polygons.length>n; n++) {
-      if(!polygons[n].isValid()) {
-        moveValid = false;
-        break;
+  if(targetsArePoints) {
+    var moveValid = true, polygons;
+    for(var i=0; targets.length>i && moveValid; i++) {
+      polygons = this.world.findPolygonsThatHasPoint(targets[i]);
+      for(var n=0; polygons.length>n; n++) {
+        if(!polygons[n].isValid()) {
+          moveValid = false;
+          break;
+        }
       }
     }
-  }
 
-  if(!moveValid) {
-    alert('Move not allowed. Makes polygon concave.');
-    targets.forEach(function(target) {
-      target[0] -= x;
-      target[1] -= y;
-    });
+    if(!moveValid) {
+      alert('Move not allowed. Makes polygon concave.');
+      targets.forEach(function(target) {
+        target[0] -= x;
+        target[1] -= y;
+      });
+    }
   }
 };
 
-Controller.moveSpeed = 25;
+Controller.moveSpeed = 10;

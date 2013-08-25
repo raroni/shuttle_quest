@@ -6,6 +6,8 @@ function Renderer(world) {
 
   this.context = this.element.getContext('2d');
   this.context.translate(this.element.width/2, this.element.height/2);
+
+  this.polygonTypeIconSize = 30;
 }
 
 Renderer.prototype.update = function() {
@@ -14,6 +16,26 @@ Renderer.prototype.update = function() {
   this.drawPolygons();
   this.drawPoints();
   this.drawScreen();
+  this.drawPolygonTypes();
+};
+
+Renderer.prototype.drawPolygonTypes = function() {
+  this.context.save();
+  this.context.translate(this.element.width/2-this.polygonTypeIconSize/2-5, -this.element.height/2+this.polygonTypeIconSize/2+5);
+  this.world.polygonTypes.forEach(function(polygonType) {
+    this.drawPolygonType(polygonType);
+    this.context.translate(-this.polygonTypeIconSize-5, 0);
+  }.bind(this));
+  this.context.restore();
+};
+
+Renderer.prototype.drawPolygonType = function(polygonType) {
+  this.context.fillStyle = polygonType.id == this.world.selectedPolygonTypeId ? '#fff' : '#000';
+  this.context.fillRect(-this.polygonTypeIconSize/2, -this.polygonTypeIconSize/2, this.polygonTypeIconSize, this.polygonTypeIconSize);
+
+  var borderWidth = 3;
+  this.context.fillStyle = polygonType.color;
+  this.context.fillRect(-this.polygonTypeIconSize/2+borderWidth, -this.polygonTypeIconSize/2+borderWidth, this.polygonTypeIconSize-borderWidth*2, this.polygonTypeIconSize-borderWidth*2);
 };
 
 Renderer.prototype.drawPolygons = function() {
@@ -23,7 +45,7 @@ Renderer.prototype.drawPolygons = function() {
 }
 
 Renderer.prototype.drawPolygon = function(polygon) {
-  this.context.fillStyle = 'grey';
+  this.context.fillStyle = polygon.type.color;
 
   var editorPoints = [];
   polygon.points.forEach(function(worldPoint) {
