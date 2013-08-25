@@ -55,6 +55,10 @@ Controller.prototype.gPressed = function() {
   this.world.goal = this.world.screen.position.clone();
 };
 
+Controller.prototype.iPressed = function() {
+  console.log(this.world.screen.position.toString());
+};
+
 Controller.prototype.sPressed = function() {
   this.world.start = this.world.screen.position.clone();
 };

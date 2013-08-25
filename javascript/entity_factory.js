@@ -44,22 +44,24 @@ EntityFactory = {
     );
     return world;
   },
-  createZombie: function() {
+  createRock: function(position) {
     var radius = 40;
 
-    var zombie = new Voy.Entity(
+    var rock = new Voy.Entity(
       new Voy.RigidBody({
         drag: 0.05,
         maxSpeed: 0.5,
         maxForce: 0.003,
-        bounciness: 0.5,
-        mass: 5
+        bounciness: 2,
+        mass: 0.5
       }),
       new Voy.CircleCollider(radius),
-      new Voy.CircleLayer(radius, 'red')
+      new Gravity(),
+      new Voy.CircleLayer(radius, 'grey')
     );
-    zombie.localPosition = new Voy.Vector2(500, 206);
-    return zombie;
+    rock.localPosition = position;
+    rock.addTag('rock');
+    return rock;
   },
   createTriangle: function() {
     var radius = 40;

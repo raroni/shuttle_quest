@@ -12,6 +12,8 @@ CollisionDamageInflictor.prototype.initialize = function() {
 
 CollisionDamageInflictor.prototype.collided = function(collision) {
   if(collision.isPhysical() && collision.velocityAlongNormal*-1 > this.minimumLimit) {
-    this.health.receiveDamage(Math.round(collision.velocityAlongNormal*-this.amount));
+    var otherEntity = collision.getOther(this.entity);
+    var q = otherEntity.hasTag('rock') ? 0.2 : 1;
+    this.health.receiveDamage(Math.round(collision.velocityAlongNormal*-this.amount*q));
   }
 };

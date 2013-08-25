@@ -21,6 +21,12 @@ WorldScene.prototype.setup = function() {
   this.player = EntityFactory.createSpaceship(playerPosition);
   world.addChild(this.player);
 
+  if(this.levelData.rocks) {
+    this.levelData.rocks.forEach(function(rockData) {
+      var position = Voy.Point.createFromArray(rockData.position);
+      world.addChild(EntityFactory.createRock(position));
+    }.bind(this));
+  }
   if(this.levelData.tide) world.addChild(EntityFactory.createTide(this.levelData.tide));
 
   this.levelData.walls.forEach(function(wallData) {
@@ -65,7 +71,10 @@ WorldScene.prototype.update = function(timeDelta) {
 
   Voy.Scene.prototype.update.call(this, timeDelta);
 
-  if(this.blackout.fader.isCompleted()) this.completed = true;
+  if(this.blackout.fader.isCompleted()) {
+    console.log('completed!');
+    this.completed = true;
+  }
 };
 
 WorldScene.prototype.startPlaying = function() {

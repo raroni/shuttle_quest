@@ -38,7 +38,7 @@
     this.controller = controller;
     document.addEventListener('keydown', this.keyPressed.bind(this));
     document.addEventListener('keyup', this.keyReleased.bind(this));
-    this.intestingKeys = ['up', 'down', 'right', 'left', 'c', 'd', 'r', 'w', 'p', 'm', 'z', 'x', 'g', 's'];
+    this.intestingKeys = ['up', 'down', 'right', 'left', 'c', 'd', 'r', 'w', 'p', 'm', 'z', 'x', 'g', 's', 'i'];
     this.pressedKeys = {};
   }
 

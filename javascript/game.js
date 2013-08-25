@@ -32,7 +32,7 @@ Game.prototype.getNextScene = function() {
   var scene;
 
   if(this.scene instanceof LoadingScene) {
-    this.levelNumber = 5;
+    this.levelNumber = 6;
     scene = this.makeWorldScene();
   }
   else if(this.scene instanceof WorldScene) {
