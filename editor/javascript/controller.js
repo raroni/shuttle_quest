@@ -83,7 +83,7 @@ Controller.prototype.handleMove = function(x, y) {
   for(var i=0; targets.length>i && moveValid; i++) {
     polygons = this.world.findPolygonsThatHasPoint(targets[i]);
     for(var n=0; polygons.length>n; n++) {
-      if(!polygons[i].isValid()) {
+      if(!polygons[n].isValid()) {
         moveValid = false;
         break;
       }
