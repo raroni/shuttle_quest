@@ -37,7 +37,9 @@ WorldScene.prototype.setup = function() {
   this.addChild(hud);
 
   this.addChild(EntityFactory.createPresenter(this.renderer.canvas.resolution));
-  this.addChild(EntityFactory.createBlackout(this.renderer.canvas.resolution));
+
+  this.blackout = EntityFactory.createBlackout(this.renderer.canvas.resolution);
+  this.addChild(this.blackout);
 
   Voy.Scene.prototype.setup.call(this);
 };
@@ -57,6 +59,8 @@ WorldScene.prototype.update = function(timeDelta) {
   }
 
   Voy.Scene.prototype.update.call(this, timeDelta);
+
+  if(this.blackout.fader.isCompleted()) this.completed = true;
 };
 
 WorldScene.prototype.startPlaying = function() {

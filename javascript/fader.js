@@ -23,10 +23,10 @@ Fader.prototype.update = function(timeDelta) {
     if(Math.abs(step) > largestStep) step = largestStep*(step/Math.abs(step));
     this.current += step;
     this.current = Math.min(1, this.current);
-    if(this.completed()) this.deactivate();
+    if(this.isCompleted()) this.deactivate();
   }
 };
 
-Fader.prototype.completed = function() {
+Fader.prototype.isCompleted = function() {
   return this.current === this.target;
 };
