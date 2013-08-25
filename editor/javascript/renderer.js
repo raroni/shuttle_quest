@@ -72,4 +72,20 @@ Renderer.prototype.drawScreen = function() {
     editorSize[1]
   );
   this.context.globalAlpha = 1;
+
+  var crossHairSize = 14;
+  var crossHairWidth = 2;
+  this.context.fillStyle = 'yellow';
+  this.context.fillRect(
+    editorPosition[0]-crossHairWidth/2,
+    editorPosition[1]-crossHairSize/2,
+    crossHairWidth,
+    crossHairSize
+  );
+  this.context.fillRect(
+    editorPosition[0]-crossHairSize/2,
+    editorPosition[1]-crossHairWidth/2,
+    crossHairSize,
+    crossHairWidth
+  );
 };
