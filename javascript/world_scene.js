@@ -6,6 +6,7 @@ function WorldScene(timer, levels, levelNumber) {
   this.keyboard = Voy.Keyboard.getInstance();
   this.levels = levels;
   this.levelData = this.levels.find(levelNumber);
+  this.time = 0;
 }
 
 WorldScene.prototype = Object.create(Voy.Scene.prototype);
@@ -60,9 +61,10 @@ WorldScene.prototype.initialize = function() {
 };
 
 WorldScene.prototype.update = function(timeDelta) {
+  this.time += timeDelta;
   if(!this.outcome) {
     if(!this.playing) {
-      if(this.keyboard.anyKeysPressed()) this.startPlaying();
+      if(this.time > 500 && this.keyboard.anyKeysPressed()) this.startPlaying();
     }
     else if(this.timer.isCompleted() || this.player.health.isDead()) {
       this.lose();

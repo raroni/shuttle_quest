@@ -13,6 +13,7 @@ LoadingScene.prototype.initialize = function() {
   this.assets.images.add('spaceship/flame.png');
   this.assets.images.add('spaceship/large_flame.png');
   this.assets.images.add('water.png');
+  this.assets.images.add('happy_dog.jpg');
 
   this.assets.images.add('bg.jpg');
 

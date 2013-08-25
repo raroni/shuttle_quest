@@ -41,11 +41,19 @@ Game.prototype.getNextScene = function() {
       this.timer.windUp(Game.secondsPerLevel*1000);
       scene = this.makeWorldScene();
     } else {
-      scene = new LevelCompletedScene(this.timer, this.levelNumber);
+      if(this.levelNumber == this.levels.count()) {
+        scene = new CreditsScene(this.timer);
+      } else {
+        scene = new LevelCompletedScene(this.timer, this.levelNumber);
+      }
     }
   }
   else if(this.scene instanceof LevelCompletedScene) {
     this.levelNumber++;
+    scene = this.makeWorldScene();
+  }
+  else if(this.scene instanceof CreditsScene) {
+    this.levelNumber = 1;
     scene = this.makeWorldScene();
   } else {
     throw new Error('I dont know what to do!');
