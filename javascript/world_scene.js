@@ -31,6 +31,8 @@ WorldScene.prototype.setup = function() {
     world.addChild(EntityFactory.createWall(position, points, polygonType));
   });
 
+  world.addChild(EntityFactory.createGoal(new Voy.Point(277, -1775)));
+
   this.addChild(EntityFactory.createBackground());
   this.addChild(world);
   this.addChild(hud);
@@ -54,4 +56,8 @@ WorldScene.prototype.update = function(timeDelta) {
 WorldScene.prototype.start = function() {
   this.playing = true;
   this.timer.start();
+};
+
+WorldScene.prototype.win = function() {
+  this.won = true;
 };

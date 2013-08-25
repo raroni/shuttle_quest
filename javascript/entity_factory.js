@@ -54,7 +54,7 @@ EntityFactory = {
         mass: 5
       }),
       new Voy.CircleCollider(radius),
-      new Voy.CircleLayer('red', radius)
+      new Voy.CircleLayer(radius, 'red')
     );
     zombie.localPosition = new Voy.Vector2(500, 206);
     return zombie;
@@ -113,6 +113,16 @@ EntityFactory = {
     hud.addChild(healthCircle);
 
     return hud;
+  },
+  createGoal: function(position) {
+    var radius = 50;
+    var goal = new Voy.Entity(
+      new Voy.CircleCollider(radius),
+      new Voy.CircleLayer(radius),
+      new CollisionWin()
+    );
+    goal.localPosition = position;
+    return goal;
   },
   createPresenter: function(resolution) {
     var presenter = new Voy.Entity(
