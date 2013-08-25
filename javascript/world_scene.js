@@ -14,10 +14,12 @@ WorldScene.prototype.setup = function() {
   var levelData = JSON.parse(this.assets.texts.levels)[1];
   levelData.walls.forEach(function(wallData) {
     var position = new Voy.Point(wallData.position[0], wallData.position[1]);
-    var size = new Voy.Vector2(wallData.size[0], wallData.size[1]);
-    var rotation = wallData.rotation;
+    var points = [];
+    wallData.points.forEach(function(point) {
+      points.push(new Voy.Point(point[0], point[1]));
+    });
 
-    world.addChild(EntityFactory.createWall(position, size, rotation));
+    world.addChild(EntityFactory.createWall(position, points));
   });
 
   this.addChild(EntityFactory.createBackground());

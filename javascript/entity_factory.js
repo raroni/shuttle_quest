@@ -14,7 +14,7 @@ EntityFactory = {
       new SpaceshipSprite()
     );
     spaceship.addTag('player');
-    spaceship.localPosition = new Voy.Vector2(185, 170);
+    spaceship.localPosition = new Voy.Vector2(0, 0);
 
     var engine = new Voy.Entity(
       new EngineRotator(),
@@ -73,15 +73,14 @@ EntityFactory = {
     triangle.localPosition = new Voy.Vector2(50, 50);
     return triangle;
   },
-  createWall: function(position, size, rotation) {
+  createWall: function(position, points, rotation) {
     var wall = new Voy.Entity(
       new Voy.RigidBody({ static: true }),
-      new Voy.RectangleCollider(size),
-      new Voy.RectangleLayer('grey', size)
+      new Voy.PolygonCollider(points),
+      new Voy.PolygonLayer('grey', points)
     );
 
     wall.localPosition = position;
-    wall.localRotation = rotation;
     return wall;
   },
   createBackground: function() {
