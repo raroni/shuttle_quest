@@ -1,5 +1,6 @@
 filePaths = [
   'javascript/lib/number_ext.js',
+  'javascript/lib/request_animation_frame_polyfill.js',
   'javascript/lib/voy/voy.js',
   'javascript/lib/voy/voy/game.js',
   'javascript/lib/voy/voy/vector2.js',
