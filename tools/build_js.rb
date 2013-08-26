@@ -96,7 +96,7 @@ end
 
 source = fileSources.join("\n\n")
 
-file = File.new('snitch.js', 'w')
+file = File.new('build.js', 'w')
 file.write(source)
 file.close
 
