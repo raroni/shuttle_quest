@@ -132,7 +132,8 @@ EntityFactory = {
     var radius = 50;
     var goal = new Voy.Entity(
       new Voy.CircleCollider(radius),
-      new Voy.CircleLayer(radius),
+      new Voy.Sprite('goal.png'),
+      new Rotation(),
       new CollisionWin()
     );
     goal.localPosition = position;
